@@ -32,7 +32,10 @@ const updateTask = asyncWrapper(async (req, res) => {
 
 const flagTaskCompleted = asyncWrapper(async (req, res) => {
     const taskId = req.params.id;
-    const updatedTask = await Task.findByIdAndUpdate(taskId, {completed: true}, {new: true});
+    let updatedTask = await Task.findById(taskId);
+    console.log(updatedTask)
+    updatedTask = await Task.findByIdAndUpdate(taskId, {completed: !updatedTask.completed}, {new: true})
+    console.log(updatedTask)
     if (!updatedTask) {
         return res.status(404).json({message: `Task ${taskId} not found`});
     }

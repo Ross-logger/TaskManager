@@ -6,57 +6,86 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #f8f9fa; /* Light gray background */
 }
 
 /* Container styles */
 #container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
     padding: 20px;
-    width: 100%; /* Set container width to 100% */
+    max-width: 1200px; /* Maximum width for the container */
+    width: 100%; /* Take up full width of the viewport */
+    margin: 0 auto; /* Center the container horizontally */
 }
 
-/* Quote container styles */
-#quoteContainer {
-    width: 25%; /* Set fixed width */
-    padding: 20px;
-    background-color: #f9f9f9;
+/* Card styles */
+.task-container {
+    background-color: #fff; /* White background */
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex-grow: 1; /* Allow the cards to stretch */
 }
 
-/* Form container styles */
-#form-container {
-    width: 35%; /* Set fixed width */
+.task-container h1 {
+    text-align: center; /* Center Task Manager title */
+    font-size: 36px; /* Increase font size of Task Manager title */
 }
 
-/* Task list styles */
-#taskList {
-    width: 35%; /* Set fixed width */
+.task-container h2 {
+    color: #007bff; /* Blue header text color */
 }
 
-/* Form and table styles */
-.form-group {
-    margin-bottom: 10px;
+.task-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-input, select, button {
-    width: calc(100% - 22px);
+.task-container form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-container form label {
+    margin-bottom: 5px;
+}
+
+.task-container form input[type="text"],
+.task-container form select {
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     transition: border-color 0.3s ease;
+    flex-grow: 1; /* Allow the form inputs to stretch */
 }
 
-button {
-    background-color: #007bff;
-    color: #fff;
+.task-container .button-group {
+    display: flex;
+    gap: 20px; /* Adjust the gap between buttons */
+}
+
+.task-container .add-task-button {
+    background-color: #007bff; /* Blue button background color */
+}
+
+.task-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px; /* Increase font size of buttons */
 }
 
-button:hover {
-    background-color: #0056b3;
+.task-container button i {
+    font-size: 24px; /* Increase icon size */
+}
+
+.task-container button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 /* Table styles */
@@ -71,6 +100,33 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #f2f2f2; /* Light gray header background */
     text-align: left;
+}
+
+/* Row styles */
+.row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow the rows to wrap onto multiple lines */
+}
+
+/* Flex item styles for rows */
+.row > * {
+    flex-basis: calc(33.33% - 20px); /* Three items per row with gap between */
+    max-width: calc(33.33% - 20px);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .row > * {
+        flex-basis: calc(50% - 20px); /* Two items per row on smaller screens */
+        max-width: calc(50% - 20px);
+    }
+}
+
+
+.completed-task {
+    text-decoration: line-through;
+    font-style: italic;
 }
