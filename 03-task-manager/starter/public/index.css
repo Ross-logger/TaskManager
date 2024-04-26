@@ -1,39 +1,52 @@
+/* Global styles */
 body {
+    margin: 0;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0; /* Set background color */
-    font-family: 'Roboto', sans-serif; /* Use Roboto font for the whole document */
 }
 
-#taskForm {
-    width: 300px; /* Set the width of the form */
-    padding: 20px; /* Add some padding */
-    background-color: #fff; /* Set background color */
-    border-radius: 10px; /* Add border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+/* Container styles */
+#container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%; /* Set container width to 100% */
 }
 
-label {
-    display: block;
+/* Quote container styles */
+#quoteContainer {
+    width: 25%; /* Set fixed width */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form container styles */
+#form-container {
+    width: 35%; /* Set fixed width */
+}
+
+/* Task list styles */
+#taskList {
+    width: 35%; /* Set fixed width */
+}
+
+/* Form and table styles */
+.form-group {
     margin-bottom: 10px;
 }
 
-input,
-select,
-button {
-    width: calc(100% - 22px); /* Set the width to 100% minus padding and border */
+input, select, button {
+    width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    transition: border-color 0.3s ease; /* Add transition for smoother hover effect */
-}
-
-input[type="text"] {
-    display: inline-block; /* Ensure it's inline */
+    transition: border-color 0.3s ease;
 }
 
 button {
@@ -46,79 +59,18 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Additional Styles for Task Manager Title and Form Container */
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-#form-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#form-container h1 {
-    margin-bottom: 20px;
-    color: #007bff; /* Set Task Manager title color */
-    font-size: 28px; /* Increase font size */
-}
-
-.form-group {
-    margin-bottom: 10px;
-}
-
-/* Add hover effect for inputs and select */
-input:hover,
-select:hover {
-    border-color: #007bff;
-}
-
-/* Styles for the Task List */
-#taskList {
-    margin-top: 20px; /* Add some top margin */
-}
-
-/* Styles for the Table */
+/* Table styles */
 table {
-    width: 100%; /* Make the table fill its container */
-    border-collapse: collapse; /* Collapse table borders */
-    border-spacing: 0; /* Set border spacing to 0 */
-    background-color: #fff; /* Set background color */
-    border-radius: 5px; /* Add border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* Styles for Table Head */
-thead {
-    background-color: #007bff; /* Set background color */
-    color: #fff; /* Set text color */
+th, td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
 }
 
-/* Styles for Table Body */
-tbody {
-    border-top: 2px solid #007bff; /* Add border top */
-}
-
-/* Styles for Table Rows */
-tr {
-    border-bottom: 1px solid #ddd; /* Add border bottom */
-}
-
-/* Styles for Table Cells */
-td, th {
-    padding: 10px; /* Add padding */
-    text-align: left; /* Align text to the left */
-}
-
-/* Alternate Row Colors */
-tr:nth-child(even) {
-    background-color: #f2f2f2; /* Set even row background color */
-}
-
-/* Hover Effect for Rows */
-tr:hover {
-    background-color: #f0f0f0; /* Set background color on hover */
+th {
+    background-color: #f2f2f2;
+    text-align: left;
 }

@@ -18,7 +18,6 @@ const getTask = asyncWrapper(async (req, res) => {
 
 const createTask = asyncWrapper(async (req, res) => {
     const task = await Task.create({"name": req.body.taskName, "completed": req.body.taskStatus !== "inprogress"});
-    console.log(task)
     res.status(201).json(task)
 
 })
@@ -31,6 +30,16 @@ const updateTask = asyncWrapper(async (req, res) => {
     }
 })
 
+const flagTaskCompleted = asyncWrapper(async (req, res) => {
+    const taskId = req.params.id;
+    const updatedTask = await Task.findByIdAndUpdate(taskId, {completed: true}, {new: true});
+    if (!updatedTask) {
+        return res.status(404).json({message: `Task ${taskId} not found`});
+    }
+    res.json(updatedTask);
+
+})
+
 const deleteTask = asyncWrapper(async (req, res) => {
     const task = await Task.findOneAndDelete({"_id": req.params.id})
     if (!task) {
@@ -40,4 +49,4 @@ const deleteTask = asyncWrapper(async (req, res) => {
 })
 
 
-module.exports = {getAllTasks, getTask, createTask, updateTask, deleteTask};
+module.exports = {getAllTasks, getTask, createTask, updateTask, deleteTask, flagTaskCompleted};
