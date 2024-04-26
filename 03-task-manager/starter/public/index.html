@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<div id="container">
+    <h1>Task Manager</h1>
+
+    <div id="form-container">
+        <form id="taskForm">
+            <div class="form-group">
+                <label for="taskName">Task Name:</label>
+                <input type="text" id="taskName" name="taskName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="taskStatus">Task Status:</label>
+                <select id="taskStatus" name="taskStatus" required>
+                    <option value="completed">Completed</option>
+                    <option value="inprogress" selected>In progress</option>
+                </select>
+            </div>
+
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <div id="taskList">
+        <h2>All Tasks</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="taskTableBody">
+            <!-- Tasks will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById('taskForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(this); // Get form data
+        const taskName = formData.get("taskName");
+        const taskStatus = formData.get("taskStatus");
+        try {
+            const response = await fetch('/api/v1/tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Set content type to JSON
+                },
+                body: JSON.stringify({"taskName": taskName, "taskStatus": taskStatus}) // Convert to JSON string
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add task');
+            }
+
+            alert('Task added successfully!');
+            fetchTasks(); // Fetch tasks again after adding a new one
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to add task. Please try again.');
+        }
+    });
+
+    // Fetch all tasks and populate the table
+    async function fetchTasks() {
+        try {
+            const response = await fetch('/api/v1/tasks/all_tasks');
+            if (!response.ok) {
+                throw new Error('Failed to fetch tasks');
+            }
+            const tasks = await response.json();
+            const taskTableBody = document.getElementById('taskTableBody');
+            taskTableBody.innerHTML = ''; // Clear previous tasks
+
+            tasks.forEach(task => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${task.name}</td>
+                    <td>${task.completed ? 'Completed' : 'In Progress'}</td>
+                `;
+                taskTableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    }
+
+    // Fetch tasks when the page loads
+    fetchTasks();
+</script>
+</body>
+</html>
