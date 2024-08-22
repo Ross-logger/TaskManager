@@ -1,6 +1,6 @@
 # 📝 Task Manager
 
-Task Manager is a simple web application for managing tasks. Add, view, and mark tasks as completed!
+Task Manager is a web application for managing tasks. Add, view, and mark tasks as completed!
 
 **🚀 Features**
 
